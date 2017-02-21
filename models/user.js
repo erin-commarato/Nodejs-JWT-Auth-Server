@@ -6,7 +6,16 @@ mongoose.Promise = global.Promise;
 
 // Define our model
 const userSchema = new Schema({
-  email: { type: String, unique: true, lowercase: true },
+  email: {
+    type: String,
+    unique: true,
+    lowercase: true,
+    required: [true, 'Email is required.'],
+    validate: {
+      validator: (email) => email.length > 5,
+      message: 'Email must be longer than 5 characters.'
+    }
+   },
   password: String
 });
 
